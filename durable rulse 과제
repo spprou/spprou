@@ -1,0 +1,209 @@
+from durable.lang import *
+
+with ruleset('coffee'):
+
+    @when_all((m.predicate == 'type') & (m.object == 'ice'))
+    def iceCoffee(c):
+        c.assert_fact({ 'subject': c.m.subject, 'predicate': 'typeValue', 'object': 'iceCoffee' })
+
+    @when_all((m.predicate == 'type') & (m.object == 'warm'))
+    def warmCoffee(c):
+        c.assert_fact({ 'subject': c.m.subject, 'predicate': 'typeValue', 'object': 'warmCoffee' })
+
+    @when_all((m.predicate == 'type') & (m.object == 'hot'))
+    def hotCoffee(c):
+        c.assert_fact({ 'subject': c.m.subject, 'predicate': 'typeValue', 'object': 'hotCoffee' })
+
+
+    @when_all( c.first << (m.predicate == 'typeValue') & (m.object == 'iceCoffee')
+              ,(m.predicate == 'addOption1') & (m.object == 'water'))
+    def iceAmericano(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'iceAmericano' })
+
+    @when_all( c.first << (m.predicate == 'typeValue') & (m.object == 'warmCoffee')
+              ,(m.predicate == 'addOption1') & (m.object == 'water'))
+    def warmAmericano(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'warmAmericano' })
+
+    @when_all( c.first << (m.predicate == 'typeValue') & (m.object == 'hotCoffee')
+              ,(m.predicate == 'addOption1') & (m.object == 'water'))
+    def hotAmericano(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'hotAmericano' })
+
+
+    @when_all( c.first << (m.predicate == 'typeValue') & (m.object == 'iceCoffee')
+              ,(m.predicate == 'addOption1') & (m.object == 'milk'))
+    def iceLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'baseValue', 'object': 'iceLatte' })
+
+    @when_all( c.first << (m.predicate == 'typeValue') & (m.object == 'warmCoffee')
+              ,(m.predicate == 'addOption1') & (m.object == 'milk'))
+    def warmLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'baseValue', 'object': 'warmLatte' })
+
+    @when_all( c.first << (m.predicate == 'typeValue') & (m.object == 'hotCoffee')
+              ,(m.predicate == 'addOption1') & (m.object == 'milk'))
+    def hotLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'baseValue', 'object': 'hotLatte' })
+
+
+    @when_all( c.first << (m.predicate == 'baseValue') & (m.object == 'iceLatte')
+              ,(m.predicate == 'addOption2') & (m.object == 'choco'))
+    def iceChocoLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'iceChocoLatte' })
+
+    @when_all( c.first << (m.predicate == 'baseValue') & (m.object == 'warmLatte')
+              ,(m.predicate == 'addOption2') & (m.object == 'choco'))
+    def warmChocoLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'warmChocoLatte' })
+
+    @when_all( c.first << (m.predicate == 'baseValue') & (m.object == 'hotLatte')
+              ,(m.predicate == 'addOption2') & (m.object == 'choco'))
+    def hotChocoLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'hotChocoLatte' })
+
+
+    @when_all( c.first << (m.predicate == 'baseValue') & (m.object == 'iceLatte')
+              ,(m.predicate == 'addOption2') & (m.object == 'vanilla'))
+    def iceVanillaLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'iceVanillaLatte' })
+
+    @when_all( c.first << (m.predicate == 'baseValue') & (m.object == 'warmLatte')
+              ,(m.predicate == 'addOption2') & (m.object == 'vanilla'))
+    def warmVanillaLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'warmVanillaLatte' })
+
+    @when_all( c.first << (m.predicate == 'baseValue') & (m.object == 'hotLatte')
+              ,(m.predicate == 'addOption2') & (m.object == 'vanilla'))
+    def hotVanillaLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'hotVanillaLatte' })
+
+
+
+    @when_all( c.first << (m.predicate == 'baseValue') & (m.object == 'iceLatte') ,(m.predicate == 'addOption2') & (m.object == 'choco'))
+    def iceChocoLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'iceChocoLatte' })
+
+    @when_all( c.first << (m.predicate == 'baseValue') & (m.object == 'iceLatte')  ,(m.predicate == 'addOption2') & (m.object == 'vanilla'))
+    def iceVanillaLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'iceVanillaLatte' })
+
+    @when_all( c.first << (m.predicate == 'baseValue') & (m.object == 'warmLatte') ,(m.predicate == 'addOption2') & (m.object == 'choco'))
+    def warmChocoLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'warmChocoLatte' })
+
+    @when_all( c.first << (m.predicate == 'baseValue') & (m.object == 'warmLatte')  ,(m.predicate == 'addOption2') & (m.object == 'vanilla'))
+    def warmVanillaLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'warmVanillaLatte' })
+
+    @when_all( c.first << (m.predicate == 'baseValue') & (m.object == 'hotLatte') ,(m.predicate == 'addOption2') & (m.object == 'choco'))
+    def hotChocoLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'hotChocoLatte' })
+
+    @when_all( c.first << (m.predicate == 'baseValue') & (m.object == 'hotLatte')  ,(m.predicate == 'addOption2') & (m.object == 'vanilla'))
+    def hotVanillaLatte(c):
+        c.assert_fact({ 'subject': c.first.subject, 'predicate': 'is', 'object': 'hotVanillaLatte' })
+
+
+
+    @when_all((m.predicate == 'is'))
+    def output(c):
+        print('Fact: {0} {1} {2}'.format(c.m.subject, c.m.predicate, c.m.object))
+
+
+[2]
+order1 = [
+  { 'subject': 'order1', 'predicate': 'type', 'object': 'ice' },
+  { 'subject': 'order1', 'predicate': 'addOption1', 'object': 'milk' },
+  { 'subject': 'order1', 'predicate': 'addOption2', 'object': 'choco' },
+]
+
+post('coffee', order1)
+Fact: order1 is iceChocoLatte
+
+{'sid': '0', 'id': 'sid-0', '$s': 1}
+[2]
+order2 = [
+  { 'subject': 'order2', 'predicate': 'type', 'object': 'hot' },
+  { 'subject': 'order2', 'predicate': 'addOption1', 'object': 'milk' },
+  { 'subject': 'order2', 'predicate': 'addOption2', 'object': 'choco' },
+]
+
+post('coffee', order2)
+Fact: order2 is hotChocoLatte
+
+{'sid': '0', 'id': 'sid-0', '$s': 1}
+[3]
+order3 = [
+  { 'subject': 'order3', 'predicate': 'type', 'object': 'warm' },
+  { 'subject': 'order3', 'predicate': 'addOption1', 'object': 'milk' },
+  { 'subject': 'order3', 'predicate': 'addOption2', 'object': 'choco' },
+]
+
+post('coffee', order3)
+Fact: order3 is warmChocoLatte
+
+{'sid': '0', 'id': 'sid-0', '$s': 1}
+[4]
+order4 = [
+  { 'subject': 'order4', 'predicate': 'type', 'object': 'ice' },
+  { 'subject': 'order4', 'predicate': 'addOption1', 'object': 'milk' },
+  { 'subject': 'order4', 'predicate': 'addOption2', 'object': 'vanilla' },
+]
+
+post('coffee', order4)
+Fact: order4 is iceVanillaLatte
+
+{'sid': '0', 'id': 'sid-0', '$s': 1}
+[2]
+order5 = [
+  { 'subject': 'order5', 'predicate': 'type', 'object': 'hot' },
+  { 'subject': 'order5', 'predicate': 'addOption1', 'object': 'milk' },
+  { 'subject': 'order5', 'predicate': 'addOption2', 'object': 'vanilla' },
+]
+
+post('coffee', order5)
+Fact: order5 is hotVanillaLatte
+
+{'sid': '0', 'id': 'sid-0', '$s': 1}
+[3]
+order6 = [
+  { 'subject': 'order6', 'predicate': 'type', 'object': 'warm' },
+  { 'subject': 'order6', 'predicate': 'addOption1', 'object': 'milk' },
+  { 'subject': 'order6', 'predicate': 'addOption2', 'object': 'vanilla' },
+]
+
+post('coffee', order6)
+Fact: order6 is warmVanillaLatte
+
+{'sid': '0', 'id': 'sid-0', '$s': 1}
+[4]
+order7 = [
+  { 'subject': 'order7', 'predicate': 'type', 'object': 'ice' },
+  { 'subject': 'order7', 'predicate': 'addOption1', 'object': 'water' },
+]
+
+post('coffee', order7)
+Fact: order7 is iceAmericano
+
+{'sid': '0', 'id': 'sid-0', '$s': 1}
+[2]
+order8 = [
+  { 'subject': 'order8', 'predicate': 'type', 'object': 'warm' },
+  { 'subject': 'order8', 'predicate': 'addOption1', 'object': 'water' },
+]
+
+post('coffee', order8)
+Fact: order8 is warmAmericano
+
+{'sid': '0', 'id': 'sid-0', '$s': 1}
+[3]
+order9 = [
+  { 'subject': 'order9', 'predicate': 'type', 'object': 'hot' },
+  { 'subject': 'order9', 'predicate': 'addOption1', 'object': 'water' },
+]
+
+post('coffee', order9)
+Fact: order9 is hotAmericano
+
+{'sid': '0', 'id': 'sid-0', '$s': 1}
